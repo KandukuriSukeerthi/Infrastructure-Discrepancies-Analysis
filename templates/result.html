@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Counts</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .head-container {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            margin: 20px 0;
+            align-items: center;
+        }
+        .head-container h1 {
+            margin: 0;
+        }
+        .upload-button-container {
+            text-align: right;
+        }
+        .upload-button-container button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .upload-button-container button:hover {
+            background-color: #0056b3;
+        }
+        .graph-container {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            margin-top: 20px;
+        }
+        .graph {
+            width: 48%;
+        }
+        @media screen and (max-width: 768px) {
+            .graph {
+                width: 100%;
+            }
+        }
+        .resource-list-container {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            margin-top: 20px;
+        }
+        
+        .resource-list h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="head-container">
+            <h1>Infrastructure Comparison</h1>
+            <div class="upload-button-container">
+                <button onclick="window.location.href='/';">Re-Upload Files</button>
+            </div>
+        </div>
+        <div class="resource-list-container">
+            <div>
+                <h2>Deployed Resource</h2>
+                <ul>
+                    {% for resource, count in resource_counts1.items() %}
+                        <li>{{ resource }}: {{ count }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="graph-container">
+            <div class="graph">
+                <h2>Real Outcome</h2>
+                <img src="data:image/png;base64,{{ graph1 }}" alt="Graph for JSON file 1">
+            </div>
+            <div class="graph">
+                <h2>Expected Outcome</h2>
+                <img src="data:image/png;base64,{{ graph2 }}" alt="Graph for JSON file 2">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
